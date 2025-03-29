@@ -22,3 +22,31 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+
+# Spring Boot 환경설정 파일 무시
+src/main/resources/application.properties
+src/main/resources/application.yml
+src/main/resources/application-*.properties
+src/main/resources/application-*.yml
+
+# IntelliJ IDEA 관련 파일 무시
+.idea/
+*.iml
+
+# Eclipse 관련 파일 무시
+.classpath
+.project
+.settings/
+
+# Gradle 관련 파일 무시
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar  # Gradle Wrapper는 포함
+
+# Maven 관련 파일 무시
+target/
+
+# 환경 변수 파일 무시 (보안)
+.env
+
