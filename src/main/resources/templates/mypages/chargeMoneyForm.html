@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>회원 충전</title>
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 링크 스타일 지정 */
+        a {
+            color: inherit; /* 링크의 색상을 부모 요소의 색상으로 상속 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+        /* 제목 스타일 */
+        h2 {
+            color: black; /* 제목의 기본 색상 (여기서는 검은색) */
+            margin-bottom: 20px; /* 아래 여백 추가 */
+        }
+        /* 폼 스타일 */
+        .form-group {
+            margin-bottom: 20px; /* 폼 요소들 사이의 여백 추가 */
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="max-width: 400px">
+    <div class="py-5 text-center">
+        <h2>회원 돈 충전</h2>
+        <form id="rechargeForm" action="/your-controller-endpoint" th:action method="post">
+            <div class="form-group">
+                <label for="currentBalance">현재 보유금액:</label>
+                <input type="text" th:value="${loginMember.money}" class="form-control" id="currentBalance" readonly>
+            </div>
+            <div class="form-group">
+                <label for="rechargeAmount">충전할 금액:</label>
+                <select class="form-control" id="rechargeAmount" name="rechargeAmount">
+                    <option th:selected="5000" value="5000">5,000원</option>
+                    <option value="10000">10,000원</option>
+                    <option value="30000">30,000원</option>
+                    <option value="50000">50,000원</option>
+                    <option value="100000">100,000원</option>
+                    <option value="500000">500,000원</option>
+                    <option value="1000000">1,000,000원</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label id="afterRechargeAmountLabel" style="display: none;">충전 후 보유금액:</label>
+                <div id="afterRechargeAmount"></div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="rechargeBtn" >충전하기</button>
+            <a href="#" class="btn btn-secondary ml-2" onclick="history.back()">취소</a>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('rechargeAmount').addEventListener('change', function() {
+        var rechargeAmount = parseInt(this.value);
+        var currentBalance = parseInt(document.getElementById('currentBalance').value);
+        var afterRecharge = currentBalance + rechargeAmount;
+
+        document.getElementById('afterRechargeAmount').innerHTML = '충전 후 보유금액: ' + afterRecharge.toLocaleString() + '원';
+        document.getElementById('afterRechargeAmountLabel').style.display = 'block';
+
+        // 활성화된 경우에만 버튼 활성화
+        document.getElementById('rechargeBtn').disabled = false;
+    });
+</script>
+
+</body>
+</html>
+
+
+

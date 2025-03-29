@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보 수정</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="d-flex justify-content-between py-3">
+        <div>
+            <a href="#" th:href="@{/items}" class="btn btn-outline-primary">메인페이지로</a>
+        </div>
+        <div>
+            <a href="#" th:href="@{/users/mypages}" th:text="${loginUser.nickname+' 님'}" class="mr-2">OO 님</a>
+            <a href="#" th:href="@{/logout}">로그아웃</a>
+        </div>
+    </div>
+</div>
+<div class="container" style="max-width: 600px; margin-top: 50px;">
+
+    <h2 class="text-center">회원 정보 수정</h2>
+    <form th:action="@{/users}" method="post" th:method="put"> <!--th:method="PUT"-->>
+        <div class="form-group">
+            <label for="loginId">로그인 ID</label>
+            <input type="text" class="form-control" id="loginId" name="loginId" th:value="${loginUser.loginId}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="nickname">닉네임</label>
+            <input type="text" class="form-control" id="nickname" name="nickname" th:value="${loginUser.nickname}">
+        </div>
+        <div class="form-group">
+            <label for="name">이름</label>
+            <input type="text" class="form-control" id="name" name="name" th:value="${loginUser.name}">
+        </div>
+        <div class="form-group">
+            <label for="password">비밀번호</label>
+            <input type="password" class="form-control" id="password" name="password" th:value="${loginUser.password}">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">수정완료</button>
+        <a th:href="@{/users/mypage}" class="btn btn-secondary mt-3">취소</a>
+    </form>
+</div>
+</body>
+</html>

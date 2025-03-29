@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        a {
+            color: inherit; /* 링크의 색상을 부모 요소의 색상으로 상속 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" style="max-width: 600px">
+    <div class="py-5 text-center">
+        <h2>홈 화면</h2>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg" type="button"
+                    th:onclick="|location.href='@{/users}'|">
+                회원 가입
+            </button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-dark btn-lg" onclick="location.href='items.html'"
+                    th:onclick="|location.href='@{/login}'|" type="button">
+                로그인
+            </button>
+        </div>
+    </div>
+    <!-- 추가된 링크 부분 -->
+    <div class="mt-3 text-center">
+        <a href="" th:href="@{/items}" >비로그인으로 접속</a>
+
+    </div>
+    <hr class="my-4">
+
+</div> <!-- /container -->
+
+</body>
+</html>

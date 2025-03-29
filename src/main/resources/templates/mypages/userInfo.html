@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 정보</title>
+    <link th:href="@{/css/bootstrap.min.css}" href="../css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="d-flex justify-content-between py-3">
+        <div>
+            <a href="#" th:href="@{/items}" class="btn btn-outline-primary">메인페이지로</a>
+        </div>
+        <div>
+            <a href="#" th:href="@{/mypages}" th:text="${loginUser.nickname+' 님'}" class="mr-2">OO 님</a>
+            <a href="#" th:href="@{/logout}">로그아웃</a>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+
+    <h2 class="mb-4">회원 정보</h2>
+
+    <!-- 회원 정보 테이블 -->
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>로그인 ID</th>
+            <td th:text="${loginUser.loginId}"></td>
+        </tr>
+        <tr>
+            <th>닉네임</th>
+            <td th:text="${loginUser.nickname}"></td>
+        </tr>
+        <tr>
+            <th>이름</th>
+            <td th:text="${loginUser.name}"></td>
+        </tr>
+        <tr>
+            <th>잔액</th>
+            <td>
+                <span th:text="${loginUser.money}"></span>
+                <a href="#" th:href="@{/money/charge}" class="btn btn-outline-success btn-sm ms-2">충전하기</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 링크를 통한 수정, 탈퇴 등의 기능 추가 -->
+    <div class="mt-4">
+        <a href="#" th:href="@{/users/edit}" class="btn btn-primary me-2">회원 정보 수정</a>
+        <a href="#" th:href="@{/users/delete}" class="btn btn-danger">회원 탈퇴</a>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 여기에 추가적인 CSS 스타일링을 할 수 있습니다. */
+    </style>
+</head>
+
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="d-flex justify-content-between py-3">
+        <div>
+            <a href="#" th:href="@{/items}" class="btn btn-outline-primary">메인페이지로</a>
+        </div>
+        <div>
+            <a href="#" th:href="@{/templates/mypages}" th:text="${loginUser.nickname+' 님'}" class="mr-2">OO 님</a>
+            <a href="#" th:href="@{/logout}">로그아웃</a>
+        </div>
+    </div>
+</div>
+<div class="container">
+
+    <div class="py-5 text-center">
+        <h2>마이페이지</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">회원정보</h5>
+                    <p class="card-text" th:text="${loginUser.nickname+' 님의 현재 잔액:'+loginUser.money}">회원님의 현재 잔액: $1000</p>
+                    <a href="#" th:href="@{/users/info}" class="btn btn-primary">자세히 보기</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">거래 내역</h5>
+                    <p class="card-text">거래 내역확인</p>
+                    <a href="#" th:href="@{/money/transHis}" class="btn btn-primary">확인하기</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">내 상품 관리</h5>
+                    <p class="card-text">판매 중인 상품을 관리하세요.</p>
+                    <a href="#" th:href="@{/items/myItems}" class="btn btn-primary">상품 관리</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">주문 목록</h5>
+                    <p class="card-text">주문한 상품 목록을 확인하세요.</p>
+                    <a href="#" th:href="@{/orders}" class="btn btn-primary">주문 목록 보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+

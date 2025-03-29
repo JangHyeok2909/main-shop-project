@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link th:href="@{/css/bootstrap.min.css}" href="../../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 링크 스타일 지정 */
+        a {
+            color: inherit; /* 링크의 색상을 부모 요소의 색상으로 상속 */
+            text-decoration: none; /* 링크 밑줄 제거 */
+        }
+        /* 제목 스타일 */
+        h2 {
+            color: black; /* 제목의 기본 색상 (여기서는 검은색) */
+            margin-bottom: 20px; /* 아래 여백 추가 */
+        }
+    </style>
+</head>
+
+<body>
+<div class="container" style="max-width: 600px">
+    <div class="d-flex justify-content-end py-3">
+        <a th:href="@{/users/mypage}" class="me-3">마이페이지</a>
+        <!-- 로그아웃 버튼 링크 -->
+        <a href="#" onclick="logout()">로그아웃</a>
+
+        <form id="logoutForm" th:action="@{/logout}" method="get" class="d-none">
+            <!-- CSRF 토큰을 추가해야 함 -->
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        </form>
+    </div>
+
+    <div class="py-5 text-center">
+        <a href="/items"><h2>상품 목록</h2></a>
+    </div>
+
+
+    <div class="row">
+        <!--<div class="col">
+            <button class="btn btn-primary float-end"
+                    onclick="location.href='addForm.html'"
+                    th:onclick="|location.href='@{/items/add}'|"
+                    type="button">상품 등록</button>
+
+            <button class="btn btn-danger float-end me-2" onclick=""
+                    th:onclick="|location.href='@{/items/delete}'|"
+                    type="button">상품 삭제</button>
+        </div>-->
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>수량</th>
+                <th>판매자</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${itemList}">
+                <td><a href="../item.html" th:href="@{/items/{id}(id=${item.id})}" th:text="${item.id}">상품id</a></td>
+                <td><a href="../item.html" th:href="@{|/items/${item.id}|}" th:text="${item.itemName}">상품명</a></td>
+                <td th:text="${item.price}">가격</td>
+                <td th:text="${item.quantity}">수량</td>
+                <td th:text="${item.seller.nickname}">판매자</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- 검색 폼 -->
+    <form action="#" th:action="@{/items/search}" method="get" class="form-inline justify-content-center">
+        <div class="input-group mb-3">
+            <div class="col-auto">
+                <select class="form-select" id="searchType" name="searchType">
+                    <option value="itemName">상품명</option>
+                    <option value="nickname">판매자</option>
+                </select>
+            </div>
+            <div class="col">
+                <input type="text" name="searchValue" class="form-control" placeholder="검색어 입력" aria-label="Text input with select">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-outline-primary">검색</button>
+            </div>
+        </div>
+    </form>
+
+
+</div> <!-- /container -->
+
+
+
+
+<!-- JavaScript -->
+<script>
+    function logout() {
+        // 폼을 찾아서 POST 요청을 보냄
+        var form = document.getElementById("logoutForm");
+        form.submit();
+    }
+</script>
+
+</body>
+</html>
+
